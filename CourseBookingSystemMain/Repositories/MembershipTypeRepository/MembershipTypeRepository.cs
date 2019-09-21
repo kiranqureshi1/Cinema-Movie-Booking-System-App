@@ -33,6 +33,11 @@ namespace WebApplication5.Repositories.CustomersRepositories
             MembershipType MembershipType = context.MembershipTypes.Find(Id);
             context.MembershipTypes.Remove(MembershipType);
         }
+        public void DeleteAllMembershipTypes()
+        {
+            context.MembershipTypes.RemoveRange(context.MembershipTypes);
+            context.SaveChanges();
+        }
         public void UpdateMembershipType(MembershipType MembershipType)
         {
             context.Entry(MembershipType).State = EntityState.Modified;

@@ -33,6 +33,11 @@ namespace WebApplication5.Repositories.CustomersRepositories
             Customer customer = context.Customers.Find(Id);
             context.Customers.Remove(customer);
         }
+        public void DeleteAllCustomers()
+        {
+            context.Customers.RemoveRange(context.Customers);
+            context.SaveChanges();
+        }
         public void UpdateCustomer(Customer customer)
         {
             context.Entry(customer).State = EntityState.Modified;

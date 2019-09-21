@@ -1,5 +1,6 @@
 namespace CourseBookingSystemMain.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -20,6 +21,7 @@ namespace CourseBookingSystemMain.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            MigrationBuilder.Sql("DELETE FROM [table]", true);
 
             IList<Customer> customers = new List<Customer>
             {

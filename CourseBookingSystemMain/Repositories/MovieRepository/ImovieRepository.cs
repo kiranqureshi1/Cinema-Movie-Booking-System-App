@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication5.Models;
 
 namespace CourseBookingSystemMain.Repositories.MovieRepository
 {
-    public class ImovieRepository
+    interface IMovieRepository
     {
+        IEnumerable<Movie> GetMovies();
+        Movie GetMovieByID(int Id);
+        void InsertMovie(Movie Movie);
+        void DeleteMovie(int Id);
+        void UpdateMovie(Movie Movie);
+        void Save();
     }
 }
