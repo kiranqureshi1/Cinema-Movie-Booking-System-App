@@ -25,20 +25,20 @@ namespace CourseBookingSystemMain.Migrations
             {
                 new Customer { Name = "Jojo", IsSubscribedToNewsletter = true }
             };
-            var customer1 = new Customer { id = 1, Name = "Jojo", IsSubscribedToNewsletter = true };
-            var customer2 = new Customer { id = 2, Name = "Kira", IsSubscribedToNewsletter = false };
+            var customer1 = new Customer {Name = "Jojo", IsSubscribedToNewsletter = true };
+            var customer2 = new Customer {Name = "Kira", IsSubscribedToNewsletter = false };
             
             context.Customers.AddRange(customers);
             base.Seed(context);
 
             //IList<MembershipType> MembershipTypes = new List<MembershipType>
             //{
-            //    new MembershipType {Id = 1, DiscountRate = 22, DurationInMonths = 2, SignupFee = 23},
-            //    new MembershipType {Id = 2, DiscountRate = 33, DurationInMonths = 3, SignupFee = 33},
-            //    new MembershipType {Id = 3, DiscountRate = 44, DurationInMonths = 4, SignupFee = 43}
+            //    new MembershipType {DiscountRate = 22, DurationInMonths = 2, SignupFee = 23},
+            //    new MembershipType {DiscountRate = 33, DurationInMonths = 3, SignupFee = 33},
+            //    new MembershipType {DiscountRate = 44, DurationInMonths = 4, SignupFee = 43}
             //};
-            var membership1 = new MembershipType { Id = 4, DiscountRate = 26, DurationInMonths = 2, SignupFee = 3 };
-            var membership2 = new MembershipType { Id = 5, DiscountRate = 63, DurationInMonths = 5, SignupFee = 43 };
+            var membership1 = new MembershipType {Id = 5, DiscountRate = 26, DurationInMonths = 2, SignupFee = 3 };
+            var membership2 = new MembershipType {Id = 6, DiscountRate = 63, DurationInMonths = 5, SignupFee = 43 };
             //var membership3 = new MembershipType { Id = 6, DiscountRate = 34, DurationInMonths = 6, SignupFee = 63 };
             //var MembershipTypeRepository = new MembershipTypeRepository(context);
             //MembershipTypeRepository.InsertMembershipType(membership1);
@@ -48,12 +48,13 @@ namespace CourseBookingSystemMain.Migrations
 
             //context.MembershipTypes.AddRange(MembershipTypes);
             //base.Seed(context);
-
+            context.MembershipTypes.Add(membership1);
+            context.MembershipTypes.Add(membership2);
             //context.Customers.Add(customer1);
 
             IList<Movie> Movies = new List<Movie>
             {
-                new Movie {Name = "Shrek", CustomerId = customer1.id, MembershipTypeId = membership1.Id}
+                new Movie {Id = 1, Name = "Shrek", CustomerId = customer1.id, MembershipTypeId = membership2.Id}
             };
             context.Movies.AddRange(Movies);
             base.Seed(context);
