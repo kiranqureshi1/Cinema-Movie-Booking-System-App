@@ -28,6 +28,10 @@ namespace WebApplication5.Repositories.CustomersRepositories
         {
             context.Customers.Add(customer);
         }
+        public void InsertMany()
+        {
+            context.Customers.AddRange(context.Customers);
+        }
         public void DeleteCustomer(int Id)
         {
             Customer customer = context.Customers.Find(Id);

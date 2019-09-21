@@ -7,6 +7,9 @@ namespace CourseBookingSystemMain.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using WebApplication5.Models;
+    using WebApplication5.Repositories.CustomersRepositories;
+    //using WebApplication5.Repositories.MovieRepository;
+    using WebApplication5.Repositories.MembershipTypeRepository;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication5.Models.DataContext>
     {
@@ -21,17 +24,24 @@ namespace CourseBookingSystemMain.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            MigrationBuilder.Sql("DELETE FROM [table]", true);
+            var MembershipTypeRepository = new MembershipTypeRepository(context);
+            MembershipTypeRepository.DeleteAllMembershipTypes();
+            var CustomerRepository = new CustomerRepository(context);
+            CustomerRepository.DeleteAllCustomers();
+
 
             IList<Customer> customers = new List<Customer>
             {
-                new Customer { Name = "Jojo", IsSubscribedToNewsletter = true }
+                new Customer { Name = "Jojo", IsSubscribedToNewsletter = true },
+                new Customer { Name = "Kira", IsSubscribedToNewsletter = false }
             };
-            var customer1 = new Customer {Name = "Jojo", IsSubscribedToNewsletter = true };
-            var customer2 = new Customer {Name = "Kira", IsSubscribedToNewsletter = false };
-            
-            context.Customers.AddRange(customers);
+            CustomerRepository.InsertMany();
             base.Seed(context);
+            var customer1 = new Customer {Name = "Jojo", IsSubscribedToNewsletter = true };
+            //var customer2 = new Customer {Name = "Kira", IsSubscribedToNewsletter = false };
+            
+            //context.Customers.AddRange(customers);
+            //base.Seed(context);
 
             //IList<MembershipType> MembershipTypes = new List<MembershipType>
             //{
@@ -41,12 +51,11 @@ namespace CourseBookingSystemMain.Migrations
             //};
             var membership1 = new MembershipType {Id = 5, DiscountRate = 26, DurationInMonths = 2, SignupFee = 3 };
             var membership2 = new MembershipType {Id = 6, DiscountRate = 63, DurationInMonths = 5, SignupFee = 43 };
-            //var membership3 = new MembershipType { Id = 6, DiscountRate = 34, DurationInMonths = 6, SignupFee = 63 };
-            //var MembershipTypeRepository = new MembershipTypeRepository(context);
-            //MembershipTypeRepository.InsertMembershipType(membership1);
-            //MembershipTypeRepository.InsertMembershipType(membership2);
-            //MembershipTypeRepository.InsertMembershipType(membership3);
-            //MembershipTypeRepository.Save();
+            var membership3 = new MembershipType { Id = 7, DiscountRate = 34, DurationInMonths = 6, SignupFee = 63 };
+            MembershipTypeRepository.InsertMembershipType(membership1);
+            MembershipTypeRepository.InsertMembershipType(membership2);
+            MembershipTypeRepository.InsertMembershipType(membership3);
+            MembershipTypeRepository.Save();
 
             //context.MembershipTypes.AddRange(MembershipTypes);
             //base.Seed(context);

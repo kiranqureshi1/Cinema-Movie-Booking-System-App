@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication5.Models;
 
-namespace WebApplication5.Repositories.CustomersRepositories
+namespace WebApplication5.Repositories.MembershipTypeRepository
 {
     interface IMembershipTypeRepository
     {

@@ -6,7 +6,7 @@ using System.Web;
 using WebApplication5.Models;
 
 
-namespace WebApplication5.Repositories.CustomersRepositories
+namespace WebApplication5.Repositories.MembershipTypeRepository
 {
     public class MembershipTypeRepository : IMembershipTypeRepository, IDisposable
     {
