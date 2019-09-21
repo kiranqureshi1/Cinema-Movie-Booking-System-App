@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
+using WebApplication5.Models;
 
-namespace CourseBookingSystemMain.Repositories
+namespace WebApplication5.Repositories.CustomersRepositories
 {
-    public class IMembershipTypeRepository
+    interface IMembershipTypeRepository
     {
+        IEnumerable<MembershipType> GetMembershipTypes();
+        MembershipType GetMembershipTypeByID(int Id);
+        void InsertMembershipType(MembershipType MembershipType);
+        void DeleteMembershipType(int Id);
+        void UpdateMembershipType(MembershipType MemerbershipType);
+        void Save();
     }
 }
