@@ -12,6 +12,7 @@ namespace CourseBookingSystemMain.Repositories.MovieRepository
         Movie GetMovieByID(int Id);
         void InsertMovie(Movie Movie);
         void DeleteMovie(int Id);
+        void DeleteAllMovies();
         void UpdateMovie(Movie Movie);
         void Save();
     }

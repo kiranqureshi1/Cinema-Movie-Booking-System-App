@@ -13,6 +13,7 @@ namespace WebApplication5.Repositories.CustomersRepositories
         Customer GetCustomerByID(int Id);
         void InsertCustomer(Customer customer);
         void DeleteCustomer(int Id);
+        void DeleteAllCustomers();
         void UpdateCustomer(Customer customer);
         void Save();
     }

@@ -13,6 +13,7 @@ namespace WebApplication5.Repositories.CustomersRepositories
         MembershipType GetMembershipTypeByID(int Id);
         void InsertMembershipType(MembershipType MembershipType);
         void DeleteMembershipType(int Id);
+        void DeleteAllMembershipTypes();
         void UpdateMembershipType(MembershipType MemerbershipType);
         void Save();
     }
