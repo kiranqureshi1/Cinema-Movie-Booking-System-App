@@ -9,6 +9,11 @@ namespace WebApplication5.Repositories.CustomersRepositories
 {
     interface ICustomerRepository
     {
-       
+        IEnumerable<Customer> GetCustomers();
+        Customer GetCustomerByID(int Id);
+        void InsertCustomer(Customer customer);
+        void DeleteCustomer(int Id);
+        void UpdateCustomer(Customer customer);
+        void Save();
     }
 }
