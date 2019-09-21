@@ -21,6 +21,6 @@ namespace WebApplication5.Models
         public byte DurationInMonths { get; set; }
         public byte DiscountRate { get; set; }
 
-        public ICollection<Movie> Movie { get; set; }
+        //public ICollection<Movie> Movie { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication5.Models;
 
-namespace CourseBookingSystemMain.Repositories.MovieRepository
+namespace WebApplication5.Repositories.MovieRepository
 {
     interface IMovieRepository
     {
