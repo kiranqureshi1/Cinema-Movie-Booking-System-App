@@ -5,3 +5,21 @@
 
 <h2>Edit</h2>
 
+<form action="/Customer/Edit/@Model.id" method="post">
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td><label for="CustomerId">ID:</label></td>
+            <td><input id="CustomerId" type="text" name="CustomerId" value="@Model.id" /></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input id="CustomerName" type="text" name="CustomerName" value="@Model.Name" /></td>
+        </tr>
+        <tr>
+            <td>IsSubscribedToNewLetter:</td>
+            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerisSubscribedToNewsLetter" value="@Model.IsSubscribedToNewsletter" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="save" />
+</form>
