@@ -1,0 +1,43 @@
+﻿@*@model WebApplication5.Models.Customer*@
+@{
+    ViewBag.Title = "Customer";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<h2>Customers</h2>
+
+<p>it worked</p>
+
+<ul>
+    @foreach (var customer in @Model)
+    {
+        <li>@customer.Name</li>
+        <li>
+            @customer.IsSubscribedToNewsletter
+            @*<span>(<%Html.ActionLink("Edit", new {Action = "Edit", Id=customer.id})%>)</span>*@
+            @*<span>@Html.CheckBoxFor(Id => @customer.id)</span>*@
+        </li>
+
+        <li><a href="/Customer/Edit/@customer.id">Edit Customer</a></li>
+
+        <li>
+            <form method="post" action="/Customer/delete/@customer.id">
+
+                <input type="submit" value="delete" />
+
+            </form>
+        </li>
+    }
+</ul>
+<a href="/Customer/CustomerForm">Add new Customer</a>
+
+
+
+
+@*@{
+        ViewBag.Title = "Customer";
+    }
+
+    <h2>Customer</h2>*@
+
