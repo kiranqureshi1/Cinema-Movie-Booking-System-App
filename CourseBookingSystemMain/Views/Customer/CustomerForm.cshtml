@@ -1,7 +1,59 @@
-﻿
-@{
-    ViewBag.Title = "CustomerForm";
-}
+﻿@*@model WebApplication2.Models.Customer
+    <h4>
+        <b>ID:</b> @ViewBag.id <br />
+        <b>Name:</b> @ViewBag.Name <br />
+        <b>Addon:</b> @ViewBag.Addon <br />
+    </h4>
+    @{
+        ViewBag.Title = "CustomerForm";
+    }*@
 
 <h2>CustomerForm</h2>
+
+<form action="/Customer/CustomerForm" method="post">
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td><input id="CustomerId" type="text" name="CustomerId" /></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input id="CustomerName" type="text" name="CustomerName" /></td>
+        </tr>
+        <tr>
+            <td>IsSubscribedToNewLetter:</td>
+            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerisSubscribedToNewsLetter" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="save" />
+</form>
+
+@*@using (Html.BeginForm("Customer", "Customer", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <td>Enter ID: </td>
+                <p>@Model</p>
+                <td>@Html.TextBoxFor(m => m.id)</td>
+            </tr>
+            <tr>
+                <td>Enter Name: </td>
+                <td>@Html.TextBoxFor(m => m.Name)</td>
+            </tr>
+            <tr>
+                <td>Addon: </td>
+                <td>@Html.CheckBoxFor(m => m.IsSubscribedToNewsletter)</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            </tr>
+        </table>
+    }*@
+
+@*@using (Html.BeginForm("Form3", "Home", FormMethod.Post))
+    {
+        <input type="text" name="Name" placeholder="Enter your username">
+        <input type="password" name="Password" placeholder="Enter your password">
+        <button type="submit">Log In</button>
+    }*@
 
