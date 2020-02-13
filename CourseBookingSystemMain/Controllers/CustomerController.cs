@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Web.Script.Serialization;
 using System.Text;
 
-namespace WebApplication2.Controllers
+namespace WebApplication5.Controllers
 {
     //[RoutePrefix("api/customers")]
     public class CustomerController : Controller
