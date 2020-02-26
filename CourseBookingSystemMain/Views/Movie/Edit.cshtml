@@ -37,8 +37,14 @@
                 </select>
             </td>
         </tr>
+
     </table>
     <input type="submit" value="save" />
+
+    <div>
+        @Html.ActionLink("Back to the previous page", "Details", new { id = @Model.Movie.Id });
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
 </form>
 

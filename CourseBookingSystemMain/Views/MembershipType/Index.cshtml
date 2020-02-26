@@ -4,6 +4,15 @@
     Layout = null;
 }
 
+<h1>Cinema</h1>
+
+
+<h3><a href="/Customer/Index">Registered Customers</a></h3>
+<h3><a href="/MembershipType/Index">Memberships</a></h3>
+<h3><a href="/Movie/Index">Avaliable Movies</a></h3>
+
+<h2>Memberships</h2>
+
 <!DOCTYPE html>
 
 <html>
@@ -13,7 +22,7 @@
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "MembershipForm")
+        @Html.ActionLink("Create New", "Create")
     </p>
     <table class="table">
         <tr>
@@ -47,8 +56,9 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
                     @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                    <form method="post" action="/MembershipType/delete/@item.Id">
+                    <form method="post" action="/MembershipType/Delete/@item.Id">
 
                         <input type="submit" value="delete" />
                     </form>

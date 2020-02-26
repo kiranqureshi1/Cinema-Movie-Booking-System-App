@@ -9,6 +9,7 @@ using WebApplication2.Repositories.CustomersRepositories;
 using WebApplication2.Repositories.MembershipTypeRepository;
 using WebApplication2.Repositories.MovieRepository;
 using WebApplication2.ViewModel;
+using System.Net;
 
 namespace WebApplication2.Controllers
 {
@@ -18,11 +19,39 @@ namespace WebApplication2.Controllers
         ICustomerRepository customerRepository = new CustomerRepository(new CustomerContext());
         CustomerContext customerContext = new CustomerContext();
 
-        public ActionResult MembershipType()
+        public ActionResult Index()
         {
             var membershipTypes = customerContext.MembershipTypes.Include(m => m.Customers);
             var MembershipTypes = membershipTypes.ToList();
             return View(MembershipTypes);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MembershipType memberhsipType = customerContext.MembershipTypes.Find(id);
+            if (memberhsipType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(memberhsipType);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MembershipType memberhsipType = customerContext.MembershipTypes.Find(id);
+            if (memberhsipType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(memberhsipType);
         }
 
         //public ActionResult 
@@ -34,16 +63,16 @@ namespace WebApplication2.Controllers
             membershipType = iMembershipTypeRepository.GetMembershipTypeByID(id);
             iMembershipTypeRepository.DeleteMembershipType(membershipType.Id);
             iMembershipTypeRepository.Save();
-            return RedirectToAction("MembershipType");
+            return RedirectToAction("Index");
         }
 
-        public ActionResult MembershipForm()
+        public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult MembershipForm(int Id, short SignupFee, byte DurationInMonths, byte DiscountRate)
+        public ActionResult Create(int Id, short SignupFee, byte DurationInMonths, byte DiscountRate)
         {
             MembershipType membershipType = new MembershipType();
             membershipType.Id = Id;
@@ -52,7 +81,7 @@ namespace WebApplication2.Controllers
             membershipType.DiscountRate = DiscountRate;
             iMembershipTypeRepository.InsertMembershipType(membershipType);
             iMembershipTypeRepository.Save();
-            return RedirectToAction("MembershipType");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
@@ -72,7 +101,7 @@ namespace WebApplication2.Controllers
             membershipType.DiscountRate = DiscountRate;
             iMembershipTypeRepository.UpdateMembershipType(membershipType);
             iMembershipTypeRepository.Save();
-            return RedirectToAction("MembershipType");
+            return RedirectToAction("Index");
         }
     }
 }

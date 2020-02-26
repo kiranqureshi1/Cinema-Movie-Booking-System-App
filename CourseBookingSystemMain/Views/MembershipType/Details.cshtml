@@ -1,0 +1,51 @@
+﻿@model WebApplication2.Models.MembershipType
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>MembershipType</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SignupFee)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SignupFee)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DurationInMonths)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DurationInMonths)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiscountRate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiscountRate)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

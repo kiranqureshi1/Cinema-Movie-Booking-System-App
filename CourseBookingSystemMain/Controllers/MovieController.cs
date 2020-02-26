@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
@@ -16,7 +17,7 @@ namespace WebApplication2.Controllers
         ICustomerRepository iCustomerRepository = new CustomerRepository(new CustomerContext());
         CustomerContext CustomerContext = new CustomerContext();
 
-        public ActionResult Movie()
+        public ActionResult Index()
         {
             var Movies = iMovieRepository.GetMovies();
             //var movies = CustomerContext.Movies.Include(s => s.Customers);
@@ -25,9 +26,47 @@ namespace WebApplication2.Controllers
             return View(Movies);
         }
 
-        public ActionResult MovieForm()
+        public ActionResult Details(int? id)
         {
-            ViewBag.Message = "Customers form is going to display: ";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Movie movie = CustomerContext.Movies.Find(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+            return View(movie);
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Movie movie = CustomerContext.Movies.Find(id);
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+            return View(movie);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Movie movie = new Movie();
+            movie = iMovieRepository.GetMovieByID(id);
+            iMovieRepository.DeleteMovie(movie.Id);
+            iMovieRepository.Save();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Create()
+        {
+            ViewBag.Message = "Movies form is going to display: ";
             CustomerViewModel customers = new CustomerViewModel()
             {
                 Customers = iCustomerRepository.GetCustomers()
@@ -38,7 +77,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
 
-        public ActionResult MovieForm(int MovieId, string MovieName, Customer Customer)
+        public ActionResult Create(int MovieId, string MovieName, Customer Customer)
 
         {
 
@@ -50,7 +89,7 @@ namespace WebApplication2.Controllers
             iMovieRepository.InsertMovie(movie);
             iMovieRepository.Save();
 
-            return RedirectToAction("Movie");
+            return RedirectToAction("Index");
 
         }
 
@@ -79,17 +118,8 @@ namespace WebApplication2.Controllers
             iCustomerRepository.Save();
             CustomerContext.SaveChanges();
 
-            return Redirect("Movie");
+            return Redirect("Index");
         }
 
-        [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            Movie movie = new Movie();
-            movie = iMovieRepository.GetMovieByID(id);
-            iMovieRepository.DeleteMovie(movie.Id);
-            iMovieRepository.Save();
-            return RedirectToAction("Movie");
-        }
     }
 }

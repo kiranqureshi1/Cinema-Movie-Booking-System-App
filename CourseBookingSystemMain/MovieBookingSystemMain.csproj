@@ -318,17 +318,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Customer\Customer.cshtml" />
-    <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\Customer\Details.cshtml" />
-    <Content Include="Views\MembershipType\MembershipType.cshtml" />
+    <Content Include="Views\MembershipType\Index.cshtml" />
     <Content Include="Views\MembershipType\Edit.cshtml" />
-    <Content Include="Views\MembershipType\MembershipForm.cshtml" />
-    <Content Include="Views\Movie\Movie.cshtml" />
+    <Content Include="Views\MembershipType\Create.cshtml" />
+    <Content Include="Views\Movie\Index.cshtml" />
     <Content Include="Views\Movie\Edit.cshtml" />
-    <Content Include="Views\Movie\MovieForm.cshtml" />
+    <Content Include="Views\Movie\Create.cshtml" />
+    <Content Include="Views\Movie\Details.cshtml" />
+    <Content Include="Views\MembershipType\Details.cshtml" />
+    <Content Include="Views\MembershipType\Delete.cshtml" />
+    <Content Include="Views\Movie\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

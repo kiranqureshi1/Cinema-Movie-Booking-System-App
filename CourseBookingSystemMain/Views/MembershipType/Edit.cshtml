@@ -62,7 +62,9 @@
         </div>
     }
 
+
     <div>
+        @Html.ActionLink("Back to the previous page", "Details", new { id = @Model.Id });
         @Html.ActionLink("Back to List", "Index")
     </div>
 </body>

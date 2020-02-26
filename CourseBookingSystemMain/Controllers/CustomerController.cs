@@ -13,6 +13,7 @@ using System.Text;
 using WebApplication2.Repositories.MembershipTypeRepository;
 using WebApplication2.Repositories.MovieRepository;
 using WebApplication2.ViewModel;
+using System.Net;
 
 namespace WebApplication2.Controllers
 {
@@ -25,8 +26,9 @@ namespace WebApplication2.Controllers
         IMovieRepository imovieRepository = new MovieRepository(new CustomerContext());
         CustomerContext CustomerContext = new CustomerContext();
 
+
         // GET: Customers
-        public ActionResult Customer()
+        public ActionResult Index()
         {
             // ViewBag.Message = "Customers detail is: ";
             // var MembershipTypeSignupfee = iCustomerRepository.GetMembershipTypeSignupFee(id);
@@ -44,8 +46,22 @@ namespace WebApplication2.Controllers
             //return Content("Hey");
         }
 
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = CustomerContext.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
         //public ActionResult CustomerForm(Customer Customer)
-        public ActionResult CustomerForm(Customer customer)
+        public ActionResult Create(Customer customer)
         {
             var membershipTypes = iMembershipTypeRepository.GetMembershipTypes();
             var Movie = imovieRepository.GetMovies();
@@ -86,7 +102,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
 
-        public ActionResult CustomerForm(int CustomerId, string CustomerName, bool CustomerisSubscribedToNewsLetter, int membershipTypeId, Movie movie)
+        public ActionResult Create(int CustomerId, string CustomerName, bool CustomerisSubscribedToNewsLetter, int membershipTypeId, Movie movie)
         {
 
             // Customer customer = new Customer();
@@ -152,7 +168,7 @@ namespace WebApplication2.Controllers
             // iCustomerRepository.Save();
             // imovieRepository.Save();
 
-            return RedirectToAction("Customer");
+            return RedirectToAction("Index");
 
         }
 
@@ -184,7 +200,21 @@ namespace WebApplication2.Controllers
             //CustomerContext.Movies.AddRange(movie);
             imovieRepository.Save();
             CustomerContext.SaveChanges();
-            return RedirectToAction("Customer");
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = CustomerContext.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
         }
 
         [HttpPost]
@@ -194,7 +224,7 @@ namespace WebApplication2.Controllers
             customer = iCustomerRepository.GetCustomerByID(id);
             iCustomerRepository.DeleteCustomer(customer.id);
             iCustomerRepository.Save();
-            return RedirectToAction("Customer");
+            return RedirectToAction("Index");
         }
 
     }

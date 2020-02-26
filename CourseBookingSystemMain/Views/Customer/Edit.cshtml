@@ -58,4 +58,10 @@
 
     </table>
     <input type="submit" value="save" />
+    <br />
+
+    <div>
+        @Html.ActionLink($"Back to {Model.Customer.Name} ", "Details", new { id = @Model.Customer.id })
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 </form>
