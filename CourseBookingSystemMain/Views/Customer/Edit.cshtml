@@ -1,25 +1,61 @@
-﻿
-@{
-    ViewBag.Title = "Edit";
-}
-
+﻿@model WebApplication2.ViewModel.CustomerViewModel
+@*@{
+        ViewBag.Title = "Edit";
+    }*@
 <h2>Edit</h2>
 
-<form action="/Customer/Edit/@Model.id" method="post">
+@*<form action="/Customer/Edit/@Model.id/@Model.Name/true/@Model.CurrentMembershipTypeId" method="post">*@
+
+<form action="/Customer/Edit" method="post">
     <table>
+        @*<tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>IsSubscribedToNewLetter:</th>
+            </tr>*@
+
         <tr>
             <td>Id:</td>
             <td><label for="CustomerId">ID:</label></td>
-            <td><input id="CustomerId" type="text" name="CustomerId" value="@Model.id" /></td>
+            <td><input id="Customerid" type="number" name="Customerid" value="@Model.Customer.id" /></td>
         </tr>
         <tr>
             <td>Name:</td>
-            <td><input id="CustomerName" type="text" name="CustomerName" value="@Model.Name" /></td>
+            <td><input id="CustomerName" type="text" name="CustomerName" value="@Model.Customer.Name" /></td>
         </tr>
         <tr>
             <td>IsSubscribedToNewLetter:</td>
-            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerisSubscribedToNewsLetter" value="@Model.IsSubscribedToNewsletter" /></td>
+            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerIsSubscribedToNewsLetter" value="@Model.Customer.IsSubscribedToNewsletter" /></td>
         </tr>
+
+        <tr>
+
+            <td>MembershipType:</td>
+            <td>
+                <select id="MembershipTypeId" name="MembershipTypeId">
+                    @foreach (var membershipType in @Model.MembershipTypes)
+                    {
+                        <option value=@membershipType.Id>
+                            @membershipType.Id
+                        </option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Movie:</td>
+            <td>
+                <select id="MovieId" name="MovieId">
+                    @foreach (var movie in @Model.Movies)
+                    {
+                        <option value=@movie.Id>
+                            @movie.Name
+                        </option>
+                    }
+                </select>
+            </td>
+        </tr>
+
     </table>
     <input type="submit" value="save" />
 </form>

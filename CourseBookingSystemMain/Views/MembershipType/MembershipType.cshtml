@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebApplication2.Models.MembershipType>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MembershipType</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "MembershipForm")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SignupFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DurationInMonths)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiscountRate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => @item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SignupFee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DurationInMonths)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiscountRate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    <form method="post" action="/MembershipType/delete/@item.Id">
+
+                        <input type="submit" value="delete" />
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

@@ -3,57 +3,93 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication5.Models;
+using WebApplication2.Models;
+using WebApplication2.Repositories.CustomersRepositories;
+using WebApplication2.Repositories.MovieRepository;
+using WebApplication2.ViewModel;
 
-namespace WebApplication5.Controllers
+namespace WebApplication2.Controllers
 {
     public class MovieController : Controller
     {
-        // GET: Movie/Random
-        //public ActionResult Random()
-        //{
-        //    var movie = new Movie() { Name = "Shrek" };
-        //    var customers = new List<Customer>
-        //    {
-        //        new Customer {Name = "Customer 1"},
-        //        new Customer {Name = "Customer 2"}
-        //    };
+        IMovieRepository iMovieRepository = new MovieRepository(new CustomerContext());
+        ICustomerRepository iCustomerRepository = new CustomerRepository(new CustomerContext());
+        CustomerContext CustomerContext = new CustomerContext();
 
-        //    var viewModel = new RandomMovieViewModel
-        //    {
-        //        Movie = movie,
-        //        Customers = customers
-        //    };
+        public ActionResult Movie()
+        {
+            var Movies = iMovieRepository.GetMovies();
+            //var movies = CustomerContext.Movies.Include(s => s.Customers);
+            //var customers = CustomerContext.Customers.Include(c => c.Movies);
+            //var Movies = movies.ToList();
+            return View(Movies);
+        }
 
-        //    return View(viewModel);
+        public ActionResult MovieForm()
+        {
+            ViewBag.Message = "Customers form is going to display: ";
+            CustomerViewModel customers = new CustomerViewModel()
+            {
+                Customers = iCustomerRepository.GetCustomers()
+            };
+            //var customers = iCustomerRepository.GetCustomers();
+            return View(customers);
+        }
 
-        //    // return Content("Hello world");
-        //    // return HttpNotFound();
-        //    //return new EmptyResult();
-        //    // return RedirectToAction("Index", "Home", new { page = 1, sortBy = "Name" });
-        //}
+        [HttpPost]
 
-        //[Route("Movie/ByReleaseDate/{year}/{month:regex(\\d{2}):range(1,12)}")]
-        //public ActionResult ByReleaseDate(int year, int month)
-        //{
-        //    return Content(year + "/" + month);
-        //}
+        public ActionResult MovieForm(int MovieId, string MovieName, Customer Customer)
 
-        //public actionresult edit(int id)
-        //{
-        //    return content("id = " + id);
-        //}
+        {
 
-        ////movies
-        //public actionresult index(int? pageindex, string sortby)
-        //{
-        //    if (!pageindex.hasvalue)
-        //        pageindex = 1;
-        //    if (string.isnullorwhitespace(sortby))
-        //        sortby = "name";
-        //    return content(string.format("pageindex={0}&sortby={1}", pageindex, sortby));
-        //}
+            Movie movie = new Movie();
+            movie.Id = MovieId;
+            movie.Name = MovieName;
+            movie.Customers.Add(Customer);
 
+            iMovieRepository.InsertMovie(movie);
+            iMovieRepository.Save();
 
+            return RedirectToAction("Movie");
+
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Movie movie = new Movie();
+            movie = iMovieRepository.GetMovieByID(id);
+            CustomerViewModel Movie = new CustomerViewModel
+            {
+                Customers = CustomerContext.Customers,
+                Movie = movie
+            };
+            return View(Movie);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int MovieId, string MovieName, IList<Customer> customers)
+        {
+            Movie movie = new Movie();
+            movie.Id = MovieId;
+            movie.Name = MovieName;
+            movie.Customers = customers;
+
+            iMovieRepository.UpdateMovie(movie);
+            iMovieRepository.Save();
+            iCustomerRepository.Save();
+            CustomerContext.SaveChanges();
+
+            return Redirect("Movie");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            Movie movie = new Movie();
+            movie = iMovieRepository.GetMovieByID(id);
+            iMovieRepository.DeleteMovie(movie.Id);
+            iMovieRepository.Save();
+            return RedirectToAction("Movie");
+        }
     }
 }

@@ -1,36 +1,96 @@
-﻿@*@model WebApplication5.Models.Customer*@
+﻿@model  IEnumerable<WebApplication2.Models.Customer>
+
 @{
-    ViewBag.Title = "Customer";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Customers";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-<h2>Customers</h2>
 
-<p>it worked</p>
+<p>
+    @Html.ActionLink("Create New", "CustomerForm")
+</p>
 
-<ul>
-    @foreach (var customer in @Model)
+<table>
+    <tr>
+        <th></th>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Subscription</th>
+        <th>MembershipType signup fee</th>
+        <th>Movies</th>
+    </tr>
+
+    @foreach (var item in @Model)
     {
-        <li>@customer.Name</li>
-        <li>
-            @customer.IsSubscribedToNewsletter
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = @item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = @item.Name }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.id }, new { onclick = "return confirm('Are you sure you wish to delete this article?');" })*@
+                @*<p><a href="/Customer/Edit/@item.id">Edit Customer</a></p>*@
+                <form method="post" action="/Customer/delete/@item.id">
+
+                    <input type="submit" value="delete" />
+                </form>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.IsSubscribedToNewsletter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.CurrentMembershipType.SignupFee)
+            </td>
+            <td>
+                @for (int i = 0; i < @item.Movies.ToList().Count(); i++)
+                {
+                    @item.Movies.ToList()[i].Name
+                }
+                @*@foreach (var movie in @item.Movies)
+                    {
+                        @movie.Name
+                    }*@
+            </td>
+        </tr>
+    }
+</table>
+@*@{
+            ViewBag.Title = "Customer";
+            //Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        <h2>@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>
+        <h2>Customers</h2>
+
+    <p>it worked</p>
+
+    <ul>
+        @foreach (var customer in @Model)
+        {
+            <li>@customer.Name</li>
+            <li>
+                @customer.IsSubscribedToNewsletter
             @*<span>(<%Html.ActionLink("Edit", new {Action = "Edit", Id=customer.id})%>)</span>*@
-            @*<span>@Html.CheckBoxFor(Id => @customer.id)</span>*@
-        </li>
+@*<span>@Html.CheckBoxFor(Id => @customer.id)</span>*@
+@*</li>
+         <li>
+             @customer.CurrentMembershipType.
+         </li>
 
-        <li><a href="/Customer/Edit/@customer.id">Edit Customer</a></li>
+         <li><a href="/Customer/Edit/@customer.id">Edit Customer</a></li>
 
-        <li>
+         <li>
             <form method="post" action="/Customer/delete/@customer.id">
 
                 <input type="submit" value="delete" />
 
             </form>
-        </li>
-    }
-</ul>
-<a href="/Customer/CustomerForm">Add new Customer</a>
+          </li>
+         }
+    </ul>
+    <a href="/Customer/CustomerForm">Add new Customer</a>*@
 
 
 
@@ -41,3 +101,37 @@
 
     <h2>Customer</h2>*@
 
+
+
+@*@foreach (var item in @Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = @item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = @item.Name }) |
+                @*<p><a href="/Customer/Edit/@item.id">Edit Customer</a></p>*@
+@*<form method="post" action="/Customer/delete/@item.id">
+
+                    <input type="submit" value="delete" />
+                </form>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.IsSubscribedToNewsletter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => @item.CurrentMembershipType.SignupFee)
+            </td>
+            <td>
+                @foreach (var movie in @item.Movies)
+                {
+                    @movie.Name
+                }
+            </td>
+        </tr>
+    }*@

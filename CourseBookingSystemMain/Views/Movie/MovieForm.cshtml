@@ -1,0 +1,36 @@
+﻿@*@model IEnumerable<WebApplication2.Models.Customer>*@
+@model WebApplication2.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "MovieForm";
+}
+
+<h2>MovieForm</h2>
+
+<form action="/Movie/MovieForm" method="post">
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td><input id="MovieId" type="text" name="MovieId" /></td>
+        </tr>
+
+        <tr>
+            <td>Name:</td>
+            <td><input id="MovieName" type="text" name="MovieName" /></td>
+        </tr>
+
+        <tr>
+            <td>Customers:</td>
+            <td>
+                <select id="Customer" multiple="multiple" name="Customer">
+                    @for (int i = 0; i < @Model.Customers.ToList().Count(); i++)
+                    {
+                        <option value=@Model.Customers.ToList()[i].id>
+                            @Model.Customers.ToList()[i].Name
+                        </option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="save" />
+</form>

@@ -1,0 +1,45 @@
+﻿@model WebApplication2.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form action="/Movie/Edit" method="post">
+    <table>
+        <tr>
+            <td>Id:</td>
+            <td><label for="MovieId">ID:</label></td>
+            <td><input id="MovieId" type="number" name="MovieId" value="@Model.Movie.Id" /></td>
+        </tr>
+
+        <tr>
+            <td>Name:</td>
+            <td><input id="MovieName" type="text" name="MovieName" value="@Model.Movie.Name" /></td>
+        </tr>
+
+        <tr>
+            <td>Customer</td>
+            <td>
+                <select id="CustomerId" name="CustomerId">
+                    @for (int i = 0; i < @Model.Customers.ToList().Count(); i++)
+                    {
+                        <option value="@Model.Customers.ToList()[i].id">
+                            @Model.Customers.ToList()[i].Name
+                        </option>
+                    }
+                    @*@foreach (var customer in @Model.Customers)
+                        {
+                            <option value=@customer.id>
+                                @customer.id
+                            </option>
+                        }*@
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="save" />
+
+</form>
+
+

@@ -1,0 +1,28 @@
+﻿@model  IEnumerable<WebApplication2.Models.Movie>
+@*@{
+        ViewBag.Title = "Movies";
+    }*@
+
+<h2>Movies</h2>
+<p>
+    @Html.ActionLink("Create New", "MovieForm")
+</p>
+
+
+@foreach (var Movie in @Model)
+{
+    <h2>@Movie.Name</h2>
+    foreach (var customer in @Movie.Customers)
+    {
+        <p>@customer.Name</p>
+    }
+
+    <p><a href="/Movie/Edit/@Movie.Id">Edit Movie</a></p>
+
+    <form method="post" action="/Movie/delete/@Movie.Id">
+        <input type="submit" value="delete" />
+
+    </form>
+    <p>------------</p>
+
+}

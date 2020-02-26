@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace WebApplication5.Models
+namespace WebApplication2.Models
 {
     //public class MovieContext : DbContext
     //{
@@ -17,17 +17,21 @@ namespace WebApplication5.Models
     //}
     public class Movie
     {
+        public Movie()
+        {
+            this.Customers = new HashSet<Customer>();
+        }
         public int Id { get; set; }
+        //[Required(ErrorMessage = "Name must be specified")]
         public string Name { get; set; }
 
-        [Required, ForeignKey(nameof(Customer))]
-        public int CustomerId { get; set; }
+        //[Required, ForeignKey(nameof(Customer))]
+        //public int CustomerId { get; set; }
 
-        [Required, ForeignKey(nameof(MembershipType))]
-        public byte MembershipTypeId { get; set; }
+        //[Required, ForeignKey(nameof(MembershipType))]
+        //public byte MembershipTypeId { get; set; }
 
-        public virtual Customer Customer { get; set; }
-        public virtual MembershipType MembershipType { get; set; }
-
+        public virtual ICollection<Customer> Customers { get; set; }
+        //public int CustomerId { get; internal set; }
     }
 }
