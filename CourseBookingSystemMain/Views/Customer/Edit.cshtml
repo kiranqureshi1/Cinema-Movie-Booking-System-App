@@ -24,8 +24,24 @@
             <td><input id="CustomerName" type="text" name="CustomerName" value="@Model.Customer.Name" /></td>
         </tr>
         <tr>
+            <td>Age:</td>
+            <td><input id="Age" type="number" name="Age" value="@Model.Customer.Age" /></td>
+        </tr>
+        <tr>
+            <td>Is the Customer still a student:</td>
+            <td><input id="StudentStatus" type="text" name="StudentStatus" @(Html.Raw(Model.Customer.StudentStatus ? "checked=\"checked\"" : "")) value="@Model.Customer.StudentStatus" /></td>
+        </tr>
+        <tr>
+            <td>Bill:</td>
+            <td><input id="Bill" type="number" name="Bill" value="@Model.Customer.Bill" /></td>
+        </tr>
+        <tr>
+            <td>Disable:</td>
+            <td><input id="Disable" type="text" name="Disable" @(Html.Raw(Model.Customer.Disable ? "checked=\"checked\"" : "")) value="@Model.Customer.Disable" /></td>
+        </tr>
+        <tr>
             <td>IsSubscribedToNewLetter:</td>
-            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerIsSubscribedToNewsLetter" value="@Model.Customer.IsSubscribedToNewsletter" /></td>
+            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerIsSubscribedToNewsLetter" @(Html.Raw(Model.Customer.IsSubscribedToNewsletter ? "checked=\"checked\"" : "")) value="@Model.Customer.IsSubscribedToNewsletter" /></td>
         </tr>
 
         <tr>
@@ -33,6 +49,7 @@
             <td>MembershipType:</td>
             <td>
                 <select id="MembershipTypeId" name="MembershipTypeId">
+                    <option value="">Select MembershipType</option>
                     @foreach (var membershipType in @Model.MembershipTypes)
                     {
                         <option value=@membershipType.Id>
@@ -46,6 +63,7 @@
             <td>Movie:</td>
             <td>
                 <select id="MovieId" name="MovieId">
+                    <option value="">Select Movies</option>
                     @foreach (var movie in @Model.Movies)
                     {
                         <option value=@movie.Id>

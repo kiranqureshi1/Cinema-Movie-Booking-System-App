@@ -65,6 +65,7 @@ namespace WebApplication2.Controllers
         {
             var membershipTypes = iMembershipTypeRepository.GetMembershipTypes();
             var Movie = imovieRepository.GetMovies();
+            Customer Customer = new Customer();
             ViewBag.Message = "Customers form is going to display: ";
             ViewBag.Movies = imovieRepository.GetMovies();
             CustomerViewModel customerViewModel = new CustomerViewModel
@@ -72,6 +73,16 @@ namespace WebApplication2.Controllers
                 MembershipTypes = CustomerContext.MembershipTypes,
                 Movies = CustomerContext.Movies,
             };
+            if (customer.StudentStatus != true)
+                ViewBag.Addon = "Selected";
+            else
+                ViewBag.Addon = "Not Selected";
+
+            if (customer.Disable != true)
+                ViewBag.Addon = "Selected";
+            else
+                ViewBag.Addon = "Not Selected";
+
             if (customer.IsSubscribedToNewsletter != true)
                 ViewBag.Addon = "Selected";
             else
@@ -102,7 +113,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
 
-        public ActionResult Create(int CustomerId, string CustomerName, bool CustomerisSubscribedToNewsLetter, int membershipTypeId, Movie movie)
+        public ActionResult Create(int CustomerId, string CustomerName, int Age, bool StudentStatus, float Bill, bool Disable, bool CustomerisSubscribedToNewsLetter, int membershipTypeId, List<Movie> movies)
         {
 
             // Customer customer = new Customer();
@@ -120,25 +131,24 @@ namespace WebApplication2.Controllers
                 Customer customer = new Customer()
                 {
                     id = CustomerId,
-
                     Name = CustomerName,
-
+                    Age = Age,
+                    StudentStatus = StudentStatus,
+                    Bill = Bill,
+                    Disable = Disable,
                     IsSubscribedToNewsletter = CustomerisSubscribedToNewsLetter,
+                    CurrentMembershipTypeId = membershipTypeId,
+                    Movies = movies
 
-                    CurrentMembershipTypeId = membershipTypeId
                 };
-                // Movie Movie = new Movie();
+                //for (int i = 0; i < movies.Count; i++)
+                //{
+                //    customer.Movies.Add(movies[i]);
+                //}
                 customerContext.Customers.Attach(customer);
-                //var mathClass = new Class { Name = "Math" };
-                // Student student1 = context.Students.FirstOrDefault(s => s.Name == "Alice");
-                //Student student2 = context.Students.FirstOrDefault(s => s.Name == "Bob");
-                //mathClass.Students.Add(student1);
-                //mathClass.Students.Add(student2);
-
-                // CustomerContext.AddToClasses(mathClass);
-                customer.Movies.Add(movie);
                 customerContext.Customers.Add(customer);
                 customerContext.SaveChanges();
+
                 //iCustomerRepository.InsertCustomer(customer);
                 // imovieRepository.InsertMovie(movie);
 
@@ -185,16 +195,29 @@ namespace WebApplication2.Controllers
             return View(customer);
         }
         [HttpPost]
-        public ActionResult Edit(int CustomerId, string CustomerName, bool CustomerIsSubscribedToNewsLetter, int membershipTypeId, IList<Movie> movie)
+        public ActionResult Edit(int CustomerId, string CustomerName, int Age, bool StudentStatus, float Bill, bool Disable, bool CustomerisSubscribedToNewsLetter, int membershipTypeId, List<Movie> movies)
         {
-            Customer Customer = new Customer();
-            Customer.id = CustomerId;
-            Customer.Name = CustomerName;
-            Customer.IsSubscribedToNewsletter = CustomerIsSubscribedToNewsLetter;
-            Customer.CurrentMembershipTypeId = membershipTypeId;
-            Customer.Movies = movie;
-            // customer.CurrentMembershipType.SignupFee = signupfee;
-            //customer.CurrentMembershipTypeId = signupfee;
+            Customer Customer = new Customer()
+            {
+                id = CustomerId,
+                Name = CustomerName,
+                Age = Age,
+                StudentStatus = StudentStatus,
+                Bill = Bill,
+                Disable = Disable,
+                IsSubscribedToNewsletter = CustomerisSubscribedToNewsLetter,
+                CurrentMembershipTypeId = membershipTypeId,
+                Movies = movies
+
+            };
+
+            //for (int i = 0; i < movies.Count; i++)
+            //{
+            //    if(!Customer.Moviess.Contains(movies[i]))
+            //    {
+            //        Customer.Moviess.Add(movies[i]);
+            //    }
+            //}
             iCustomerRepository.UpdateCustomer(Customer);
             iCustomerRepository.Save();
             //CustomerContext.Movies.AddRange(movie);
@@ -229,3 +252,4 @@ namespace WebApplication2.Controllers
 
     }
 }
+

@@ -24,6 +24,49 @@
                 @Html.DisplayFor(model => model.Name)
             </dd>
 
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalSeats)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TotalSeats)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ticket)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ticket)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AgeRestriction)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AgeRestriction)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DisabilityResourcesRequirments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DisabilityResourcesRequirments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Customers)
+            </dt>
+
+            <dd>
+                @foreach (var customer in @Model.Customers)
+                {
+                    <p>@customer.Name</p>
+                }
+            </dd>
+
             @foreach (var customer in @Model.Customers)
             {
                 <p>@customer.Name</p>

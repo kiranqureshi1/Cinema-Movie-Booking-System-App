@@ -19,9 +19,30 @@
         </tr>
 
         <tr>
+            <td>TotalSeats:</td>
+            <td><input id="TotalSeats" type="number" name="TotalSeats" value="@Model.Movie.TotalSeats" /></td>
+        </tr>
+
+        <tr>
+            <td>Ticket:</td>
+            <td><input id="Ticket" type="number" name="Ticket" value="@Model.Movie.Ticket" /></td>
+        </tr>
+
+        <tr>
+            <td>AgeRestriction:</td>
+            <td><input id="AgeRestriction" type="text" name="AgeRestriction" @(Html.Raw(Model.Movie.AgeRestriction ? "checked=\"checked\"" : "")) value="@Model.Movie.AgeRestriction" /></td>
+        </tr>
+
+        <tr>
+            <td>DisabilityResources:</td>
+            <td><input id="DisabilityResourcesRequirments" type="text" name="DisabilityResourcesRequirments" @(Html.Raw(Model.Movie.DisabilityResourcesRequirments ? "checked=\"checked\"" : "")) value="@Model.Movie.DisabilityResourcesRequirments" /></td>
+        </tr>
+
+        <tr>
             <td>Customer</td>
             <td>
                 <select id="CustomerId" name="CustomerId">
+                    <option value="">Select Customers</option>
                     @for (int i = 0; i < @Model.Customers.ToList().Count(); i++)
                     {
                         <option value="@Model.Customers.ToList()[i].id">
