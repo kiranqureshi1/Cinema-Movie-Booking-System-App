@@ -21,8 +21,27 @@
             <td><input id="CustomerName" type="text" name="CustomerName" /></td>
         </tr>
         <tr>
+            <td>Age:</td>
+            <td><input id="Age" type="number" name="Age" /></td>
+        </tr>
+        <tr>
+            <td>StudentStatus:</td>
+            <td><input id="StudentStatus" type="checkbox" value="true" name="StudentStatus" /></td>
+            <td><input name="StudentStatus" type="hidden" value="false"></td>
+        </tr>
+        <tr>
+            <td>Bill:</td>
+            <td><input id="Bill" type="number" name="Bill" /></td>
+        </tr>
+        <tr>
+            <td>Disable:</td>
+            <td><input id="Disable" type="checkbox" value="true" name="Disable" /></td>
+            <td><input name="Disable" type="hidden" value="false"></td>
+        </tr>
+        <tr>
             <td>IsSubscribedToNewLetter:</td>
-            <td><input id="CustomerisSubscribedToNewsLetter" type="text" name="CustomerisSubscribedToNewsLetter" /></td>
+            <td><input id="CustomerisSubscribedToNewsLetter" type="checkbox" value="true" name="CustomerisSubscribedToNewsLetter" /></td>
+            <td><input name="CustomerisSubscribedToNewsLetter" type="hidden" value="false"></td>
         </tr>
         <tr>
             <td>MembershipType:</td>
@@ -38,10 +57,11 @@
                 </select>
             </td>
         </tr>
+
         <tr>
             <td>Movie:</td>
             <td>
-                <select id="Movie" name="Movie">
+                <select id="MovieId" multiple="multiple" name="MovieId">
                     @*@Html.ListBoxFor(model => model.MovieId, Model.AllMovies, new { size = 8 })*@
 
                     @*@for (int i = 0; i < @Model.Movies.ToList().Count(); i++)*@
@@ -56,14 +76,22 @@
                     }
                 </select>
             </td>
-            @*@Html.LabelFor(model => model.AllMovies, "JobTag", new { @class = "control-label col-md-2" })
-
-                @Html.ListBoxFor(model => model.SelectedMovies,
-                        (IEnumerable)ViewBag.Movies,
-                        new { @class = "form-control" })
-                }*@
-
         </tr>
+
+        @*<tr>
+            <td>Movie:</td>
+            <td>*@
+        @*<select name="movieId" asp-items="Model.Options"></select>*@
+        @*<select asp-for="SelectedTags" asp-items="Model.Options"></select>
+            </td>*@
+        @*@Html.LabelFor(model => model.AllMovies, "JobTag", new { @class = "control-label col-md-2" })
+
+            @Html.ListBoxFor(model => model.SelectedMovies,
+                    (IEnumerable)ViewBag.Movies,
+                    new { @class = "form-control" })
+            }*@
+
+        @*</tr>*@
 
     </table>
     <input type="submit" value="save" />
