@@ -24,6 +24,10 @@ namespace WebApplication2.Models
         public int Id { get; set; }
         //[Required(ErrorMessage = "Name must be specified")]
         public string Name { get; set; }
+        public int TotalSeats { get; set; }
+        public int Ticket { get; set; }
+        public bool AgeRestriction { get; set; }
+        public bool DisabilityResourcesRequirments { get; set; }
 
         //[Required, ForeignKey(nameof(Customer))]
         //public int CustomerId { get; set; }

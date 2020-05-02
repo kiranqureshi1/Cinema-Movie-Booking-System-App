@@ -19,6 +19,8 @@ namespace WebApplication2.ViewModel
         public IEnumerable<SelectListItem> AllMovies { get; set; }
 
         private List<int> selectedMovies;
+
+
         public List<int> SelectedMovies
         {
             get
@@ -30,6 +32,15 @@ namespace WebApplication2.ViewModel
                 return selectedMovies;
             }
             set { selectedMovies = value; }
+        }
+
+
+        public int[] SelectedTags { get; set; }
+        public SelectList Options { get; set; }
+
+        public void OnGet()
+        {
+            Options = new SelectList(Movies, nameof(Movie.Id), nameof(Movie.Name));
         }
     }
 }

@@ -255,6 +255,10 @@
     <Compile Include="Migrations\202002131923330_configurationUpdated.Designer.cs">
       <DependentUpon>202002131923330_configurationUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005021216045_changes.cs" />
+    <Compile Include="Migrations\202005021216045_changes.Designer.cs">
+      <DependentUpon>202005021216045_changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerContext.cs" />
@@ -375,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002131923330_configurationUpdated.resx">
       <DependentUpon>202002131923330_configurationUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005021216045_changes.resx">
+      <DependentUpon>202005021216045_changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

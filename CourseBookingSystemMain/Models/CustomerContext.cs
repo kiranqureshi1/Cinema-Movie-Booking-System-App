@@ -45,5 +45,3 @@ namespace WebApplication2.Models
         }
     }
 }
-
-//how to remove migrations from scrach to clean slate https://stackoverflow.com/questions/11679385/reset-entity-framework-migrations
