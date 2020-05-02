@@ -77,15 +77,24 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
 
-        public ActionResult Create(int MovieId, string MovieName, Customer Customer)
+        public ActionResult Create(int MovieId, string MovieName, int TotalSeats, int Ticket, bool AgeRestriction, bool DisabilityResourcesRequirments, List<Customer> Customers)
 
         {
 
-            Movie movie = new Movie();
-            movie.Id = MovieId;
-            movie.Name = MovieName;
-            movie.Customers.Add(Customer);
-
+            Movie movie = new Movie()
+            {
+                Id = MovieId,
+                Name = MovieName,
+                TotalSeats = TotalSeats,
+                Ticket = Ticket,
+                AgeRestriction = AgeRestriction,
+                DisabilityResourcesRequirments = DisabilityResourcesRequirments,
+                Customers = Customers
+            };
+            //for (int i = 0; i < Customers.Count; i++)
+            //{
+            //   movie.Customers.Add(Customers[i]);
+            //}
             iMovieRepository.InsertMovie(movie);
             iMovieRepository.Save();
 
@@ -106,12 +115,26 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int MovieId, string MovieName, IList<Customer> customers)
+        public ActionResult Edit(int MovieId, string MovieName, int TotalSeats, int Ticket, bool AgeRestriction, bool DisabilityResourcesRequirments, List<Customer> Customers)
         {
-            Movie movie = new Movie();
-            movie.Id = MovieId;
-            movie.Name = MovieName;
-            movie.Customers = customers;
+            Movie movie = new Movie()
+            {
+                Id = MovieId,
+                Name = MovieName,
+                TotalSeats = TotalSeats,
+                Ticket = Ticket,
+                AgeRestriction = AgeRestriction,
+                DisabilityResourcesRequirments = DisabilityResourcesRequirments,
+                Customers = Customers
+            };
+
+            //for (int i = 0; i < Customers.Count; i++)
+            //{
+            //    if(!movie.Customers.Contains(Customers[i]))
+            //    {
+            //        movie.Customers.Add(Customers[i]);
+            //    }
+            //}
 
             iMovieRepository.UpdateMovie(movie);
             iMovieRepository.Save();
